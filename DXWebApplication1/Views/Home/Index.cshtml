@@ -1,0 +1,54 @@
+<ul>
+        <li />
+        @Html.ActionLink("Report Designer", "Designer", "Home")
+        <li />
+        @Html.ActionLink("Document Viewer", "Viewer", "Home")
+    </ul>
+
+@*@model DevExpress.XtraReports.Web.WebDocumentViewer.WebDocumentViewerModel;*@
+@*<script>
+    function previewClick(s, e) {
+        var brick = e.Brick;
+        var navigationUrl = brick && brick.navigation && brick.navigation.url;
+        if (navigationUrl && ["back", "details"].indexOf(navigationUrl) >= 0) {
+            var reportPreview = s.GetReportPreview();
+            var navigateInfo = {
+                NavigateTo: navigationUrl,
+                MasterID: e.GetBrickValue(),
+            };
+            reportPreview.drillThrough(JSON.stringify(navigateInfo));
+            e.Handled = true;
+        }
+    }
+</script>*@
+@*@{
+        var viewerRender = Html.DevExpress().WebDocumentViewer("DocumentViewer")
+            .Height("800px")
+            .ClientSideEvents(configure => configure.PreviewClick("previewClick"))
+            .Bind(Model);
+        @viewerRender.RenderHtml()
+    }*@
+
+@*@using DevExpress.Web.Mvc
+@using DevExpress.Web.Mvc.UI
+
+@{
+    ViewBag.Title = "SubmitP3sSelected";
+}
+
+<h2>SubmitP3sSelected</h2>
+
+@model DevExpress.XtraReports.UI.XtraReport
+@Html.DevExpress().WebDocumentViewer(settings =>
+{
+    settings.Name = "WebDocumentViewer1";
+
+}).Bind("TestReport").GetHtml();
+
+@section Scripts {
+    <link href="~/css/dx-reporting-skeleton-screen.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/viewer.part.bundle.css" />
+    <script src="~/js/reporting.thirdparty.bundle.js"></script>
+    <script src="~/js/viewer.part.bundle.js"></script>
+    }*@
+

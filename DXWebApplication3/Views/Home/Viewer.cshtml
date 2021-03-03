@@ -1,0 +1,40 @@
+@*@Html.DevExpress().WebDocumentViewer(settings => {
+        settings.Name = "WebDocumentViewer1";
+       // settings.ClientSideEvents.PreviewClick("previewClick");
+
+    }).Bind("MainReport").GetHtml()*@
+<link href="~/Content/css/dx-reporting-skeleton-screen.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/Content/css/viewer.part.bundle.css" />
+<script src="~/Content/js/reporting.thirdparty.bundle.js"></script>
+<script src="~/Content/js/viewer.part.bundle.js"></script>
+
+
+<script>
+    function previewClick(s, e) {
+        var brick = e.Brick;
+        var navigationUrl = brick && brick.navigation && brick.navigation.url;
+        if (navigationUrl && ["back", "details"].indexOf(navigationUrl) >= 0) {
+            var reportPreview = s.GetReportPreview();
+            var navigateInfo = {
+                NavigateTo: navigationUrl,
+                MasterID: e.GetBrickValue(),
+            };
+            reportPreview.drillThrough(JSON.stringify(navigateInfo));
+            e.Handled = true;
+        }
+    }
+</script>
+
+
+@{
+    var documentViewer = Html.DevExpress().WebDocumentViewer(settings =>
+    {
+        settings.Height = 1000;
+        settings.Name = "WebDocumentViewer1";
+        //settings.ClientSideEvents(configure =>
+        //{
+        //    configure.CustomizeMenuActions("customizeMenuAction");
+        //});
+    }).Bind("MainReport").GetHtml();
+}
+@documentViewer
